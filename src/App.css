@@ -1,0 +1,77 @@
+/* --- 1. FUENTES (Importadas de Google) --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@300;400;700&family=Source+Code+Pro:wght@700&display=swap');
+
+/* --- 2. VARIABLES GLOBALES --- */
+:root {
+  /* Fondos */
+  --bg-color: #0d0f16;        /* Negro profundo azulado */
+  --card-bg: #282d42;         /* Tarjetas */
+  
+  /* Textos */
+  --text-main: #e0e0e0;       /* Blanco humo */
+  --text-muted: #5a626bd6;    /* Gris azulado con transparencia */
+
+  /* Identidad de Rutas */
+  --color-antigua: #F976C7;   /* Rosa medio */
+  --color-ocotal: #f232a9;    /* Rosa fosfo */
+  --color-oyamel: #f1afd1;    /* Rosa palo */
+
+  /* Funcionales */
+  --color-descensos: #03a9f4; /* Azul claro */
+  
+  /* Equipamiento */
+  --equip-edu: #3872e7;       /* Azul medio */
+  --equip-salud: #4164a9;     /* Azul grisáceo */
+  --equip-abasto: #6b8dd3;    /* Azul medio-claro */
+
+  /* Tipografías */
+  --font-mono: 'Roboto Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+  --font-code: 'Source Code Pro', monospace;
+}
+
+/* --- 3. ESTILOS BASE --- */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  overflow: hidden; 
+}
+
+/* Layout Principal  */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 400px 1fr; 
+  grid-template-rows: 100vh;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* --- 4. MEDIA QUERY  --- */
+@media (max-width: 768px) {
+  body {
+    overflow: auto; 
+  }
+
+  .dashboard-container {
+    grid-template-columns: 1fr; 
+    grid-template-rows: 50vh auto; 
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .visual-area {
+    order: 1; 
+    height: 50vh;
+  }
+
+  .sidebar {
+    order: 2; 
+    height: auto;
+    padding: 20px;
+    border-right: none;
+    border-top: 2px solid var(--card-bg);
+  }
+}
