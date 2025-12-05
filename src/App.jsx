@@ -14,19 +14,24 @@ function App() {
         <Sidebar />
       </aside>
 
-      {/* CAJA 2: SUPERIOR (Mapa ARRIBA + KPIs ABAJO) */}
+      {/* CAJA 2: SUPERIOR */}
       <section className="panel panel-top" style={{ display: 'flex', flexDirection: 'column' }}>
         
-        {/* EL MAPA */}
-        <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
+        <div style={{ flex: 1, position: 'relative', minHeight: '500px' }}> {/* minHeight para que el mapa no se aplaste */}
           <MapComponent />
         </div>
 
         {/* LOS KPIs */}
-        <div className="kpi-container">
+        <div style={{ 
+          height: 'auto', 
+          minHeight: '140px', 
+          borderTop: '1px solid rgba(255,255,255,0.1)',
+          backgroundColor: 'var(--bg-panel)',
+          zIndex: 10,
+          padding: '10px 0' 
+        }}>
           <Scorecards />
         </div>
-
       </section>
 
       {/* CAJA 3: INFERIOR (Gráficas) */}

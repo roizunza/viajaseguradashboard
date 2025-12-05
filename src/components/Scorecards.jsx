@@ -4,7 +4,7 @@ import recorridosData from '../data/recorridos.json';
 
 export default function Scorecards() {
   
-  // CÁLCULOS
+  // --- CÁLCULOS ---
   const features = recorridosData?.features || [];
   const totalRutas = features.length;
   const kmTotal = features.reduce((acc, ruta) => acc + (ruta.properties.Longitud_km || 0), 0);
@@ -15,12 +15,15 @@ export default function Scorecards() {
     return sat > max ? sat : max;
   }, 0);
 
-  // ESTILOS RESPONSIVOS
+  // --- ESTILOS ---
   const s = {
     container: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', 
-      gap: '10px',
+      // MAGIA RESPONSIVA:
+      // Escritorio: Caben 4 (porque hay espacio).
+      // Celular: Se ajustan automáticamente a 2 columnas (2x2) si el espacio baja de 140px por tarjeta.
+      gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
+      gap: '0',
       width: '100%',
       height: '100%', 
       alignItems: 'center',
@@ -35,8 +38,11 @@ export default function Scorecards() {
       width: '100%',
       height: '100%',
       padding: '0 5px',
-      borderRight: '1px solid rgba(255,255,255,0.1)'
+      boxSizing: 'border-box',
+      // Borde sutil solo para separar visualmente
+      borderRight: '1px solid rgba(255,255,255,0.1)' 
     },
+    // Estilo para la última tarjeta (sin borde derecho en escritorio)
     lastCard: {
       display: 'flex',
       flexDirection: 'column',
@@ -48,31 +54,36 @@ export default function Scorecards() {
       padding: '0 5px',
       borderRight: 'none'
     },
+    
+    // TIPOGRAFÍA RESPONSIVA (clamp)
+    // Se hace chica en celular (24px) y grande en escritorio (42px)
     number: {
       color: '#A020F0', 
       fontFamily: "'Source Code Pro', monospace",
       fontSize: 'clamp(24px, 3vw, 42px)', 
       fontWeight: '700',
-      marginBottom: '4px', 
-      lineHeight: '1'
+      marginBottom: '5px', 
+      lineHeight: '1',
+      textShadow: '0 0 10px rgba(160, 32, 240, 0.3)'
     },
     title: {
       fontFamily: "'Inter', sans-serif",
-      fontSize: 'clamp(10px, 1.5vw, 14px)', 
+      fontSize: 'clamp(11px, 1.5vw, 15px)', // Se ajusta
       fontWeight: '700',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',
       marginBottom: '4px',
       color: '#FFFFFF',
-      whiteSpace: 'nowrap' 
+      whiteSpace: 'nowrap'
     },
     subtitle: {
       color: '#B4A7AF',
       fontFamily: "'Inter', sans-serif",
-      fontSize: 'clamp(9px, 1vw, 11px)', 
+      fontSize: 'clamp(9px, 1vw, 11px)', // Letra pequeña legible
       fontWeight: '500', 
       lineHeight: '1.2',
-      maxWidth: '95%' 
+      maxWidth: '95%',
+      opacity: 0.9
     }
   };
 
@@ -93,6 +104,7 @@ export default function Scorecards() {
         <div style={{...s.title, color: COLORS.rutas.Antigua}}>USUARIAS</div>
         <div style={s.subtitle}>Beneficiadas diariamente</div>
       </div>
+      {/* Nota: En móvil el borde derecho no importa tanto, se ve limpio */}
       <div style={s.lastCard}>
         <div style={s.number}>{Math.round(maxSaturacion)}%</div>
         <div style={{...s.title, color: COLORS.rutas.Ocotal}}>ALTA DEMANDA</div>
