@@ -9,32 +9,30 @@ function App() {
   return (
     <div className="app-grid">
       
-      {/* CAJA 1: LATERAL (Sidebar) */}
       <aside className="panel panel-sidebar">
         <Sidebar />
       </aside>
 
-      {/* CAJA 2: SUPERIOR */}
       <section className="panel panel-top" style={{ display: 'flex', flexDirection: 'column' }}>
         
-        <div style={{ flex: 1, position: 'relative', minHeight: '500px' }}> {/* minHeight para que el mapa no se aplaste */}
+        <div style={{ flex: 1, position: 'relative', minHeight: '400px' }}>
           <MapComponent />
         </div>
 
-        {/* LOS KPIs */}
         <div style={{ 
           height: 'auto', 
           minHeight: '140px', 
           borderTop: '1px solid rgba(255,255,255,0.1)',
           backgroundColor: 'var(--bg-panel)',
           zIndex: 10,
-          padding: '10px 0' 
+          padding: '10px 0',
+          display: 'flex',
+          alignItems: 'center'
         }}>
           <Scorecards />
         </div>
       </section>
 
-      {/* CAJA 3: INFERIOR (Gráficas) */}
       <section className="panel panel-bottom">
         <ChartsContainer />
       </section>

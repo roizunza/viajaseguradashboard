@@ -200,14 +200,15 @@ export default function MapComponent() {
     padding: '15px',
     width: '200px', 
     // CAJA SIMBOLOGÍA
-    backgroundColor: 'rgba(30, 35, 56, 0.13)', 
+    backgroundColor: 'rgba(37, 41, 62, 0.12)', 
     border: '1px solid rgba(255,255,255,0.1)',
     borderRadius: '8px',
     color: 'white',
     fontFamily: FONTS.title,
     fontSize: '11px',
     zIndex: 10,
-    backdropFilter: 'blur(12px)' 
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)'
   };
 
   const titleStyle = { margin: '0 0 10px 0', fontSize: '18px', fontWeight: 'bold', color: '#ccc', letterSpacing: '1px' };
