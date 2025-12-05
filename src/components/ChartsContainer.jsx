@@ -8,7 +8,6 @@ import equipData from '../data/equipamiento.json';
 
 export default function ChartsContainer() {
 
-  // PROCESAMIENTO DATOS
   const processRouteData = (rutaName) => {
     return paradasData.features
       .filter(f => f.properties.origen_destino.includes(rutaName))
@@ -39,7 +38,6 @@ export default function ChartsContainer() {
     return Object.keys(counts).map(key => ({ name: key, Educación: counts[key].Educ, Salud: counts[key].Salud, Abasto: counts[key].Abasto }));
   }, []);
 
-  // COMPONENTES VISUALES
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -73,9 +71,9 @@ export default function ChartsContainer() {
 
   // ESTILOS
   const styles = {
-    mainContainer: { display: 'flex', flexWrap: 'wrap', width: '100%', height: '100%', padding: '20px', overflowY: 'auto' },
+    container: { display: 'flex', flexWrap: 'wrap', width: '100%', height: '100%', padding: '20px', overflowY: 'auto' },
     leftSection: { flex: '2 1 600px', display: 'flex', flexDirection: 'column', paddingRight: '20px', minHeight: '300px', marginBottom: '20px' },
-    rightSection: { flex: '1 1 300px', display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '30px', minHeight: '300px' },
+    rightSection: { flex: '1 1 300px', display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '40px', minHeight: '300px' },
     header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', marginBottom: '10px', paddingBottom: '10px' },
     title: { fontFamily: FONTS.body, fontSize: '18px', fontWeight: '700', color: '#FFFFFF', margin: 0, letterSpacing: '0.5px' },
     legend: { display: 'flex', gap: '15px', fontSize: '13px', fontFamily: FONTS.body, color: '#FFFFFF', marginRight: '10px' },
@@ -84,9 +82,9 @@ export default function ChartsContainer() {
   };
 
   return (
-    <div style={styles.mainContainer}>
+    <div style={styles.container}>
       
-      {/* IZQUIERDA: FLUJO */}
+      {/* IZQUIERDA */}
       <div style={styles.leftSection}>
         <div style={styles.header}>
           <div style={styles.title}>Dinámica de demanda: ascensos vs descensos</div>
@@ -116,7 +114,7 @@ export default function ChartsContainer() {
         </div>
       </div>
 
-      {/* DERECHA: INFRAESTRUCTURA */}
+      {/* DERECHA */}
       <div style={styles.rightSection}>
         <div style={styles.header}>
           <div style={styles.title}>Infraestructura de cuidados</div>
@@ -129,7 +127,6 @@ export default function ChartsContainer() {
         
         <div style={{ flex: 1, minHeight: 0 }}>
           <ResponsiveContainer width="100%" height="100%">
-            {/* CAMBIO: bottom: 30 para dar espacio a las etiquetas de 13px */}
             <BarChart data={dataEquip} margin={{top:10, right:0, left:-20, bottom:30}} barCategoryGap="20%">
               <XAxis dataKey="name" axisLine={false} tickLine={false} tick={<CustomAxisTick />} interval={0} />
               <YAxis tick={{fill: '#B0B3B8', fontSize: 13, fontFamily: FONTS.body}} axisLine={false} tickLine={false} />
@@ -141,6 +138,7 @@ export default function ChartsContainer() {
           </ResponsiveContainer>
         </div>
       </div>
+
     </div>
   );
 }

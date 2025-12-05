@@ -1,7 +1,6 @@
 import React from 'react';
 import './index.css';
-import SidebarTop from './components/SidebarTop';
-import SidebarBottom from './components/SidebarBottom';
+import Sidebar from './components/Sidebar';
 import MapComponent from './components/MapComponent';
 import Scorecards from './components/Scorecards';
 import ChartsContainer from './components/ChartsContainer';
@@ -10,22 +9,28 @@ function App() {
   return (
     <div className="app-grid">
       
-      {/* WRAPPER DEL SIDEBAR (Se rompe en móvil) */}
-      <aside className="sidebar-wrapper">
-        <div className="sidebar-part-top"><SidebarTop /></div>
-        <div className="sidebar-part-bottom"><SidebarBottom /></div>
+      {/* CAJA 1: LATERAL (Sidebar) */}
+      <aside className="panel panel-sidebar">
+        <Sidebar />
       </aside>
 
-      {/* MAPA + KPIS */}
-      <section className="panel-top">
-        <div style={{ flex: 1, position: 'relative' }}><MapComponent /></div>
-        <div style={{ height: 'auto', minHeight:'110px', borderTop: '1px solid rgba(255,255,255,0.1)', backgroundColor: 'var(--bg-panel)', zIndex: 10 }}>
+      {/* CAJA 2: SUPERIOR (Mapa ARRIBA + KPIs ABAJO) */}
+      <section className="panel panel-top" style={{ display: 'flex', flexDirection: 'column' }}>
+        
+        {/* EL MAPA: Ocupa todo el espacio disponible (flex: 1) */}
+        <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
+          <MapComponent />
+        </div>
+
+        {/* LOS KPIs: Altura fija abajo (no flotante) */}
+        <div className="kpi-container">
           <Scorecards />
         </div>
+
       </section>
 
-      {/* GRÁFICAS */}
-      <section className="panel-bottom">
+      {/* CAJA 3: INFERIOR (Gráficas) */}
+      <section className="panel panel-bottom">
         <ChartsContainer />
       </section>
 

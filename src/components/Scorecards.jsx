@@ -15,86 +15,90 @@ export default function Scorecards() {
     return sat > max ? sat : max;
   }, 0);
 
-  // Estilos Responsivos inyectados
-  const responsiveGridStyle = {
-    display: 'grid',
-    // Truco CSS: Si cabe, pon 4. Si no (celular), pon 2 columnas automáticas.
-    gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
-    gap: '0',
-    width: '100%',
-    height: '100%', 
-    alignItems: 'center',
-    padding: '0' 
-  };
-
-  const cardStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center', 
-    alignItems: 'center',     
-    textAlign: 'center',      
-    padding: '15px 5px', // Un poco más de padding vertical para móvil
-    height: '100%',
-    borderRight: '1px solid rgba(255,255,255,0.1)',
-    borderBottom: '1px solid rgba(255,255,255,0.05)' // Línea sutil abajo para móvil
-  };
-
-  // Tipografía Ajustada
-  const numberStyle = {
-    color: '#A020F0', 
-    fontFamily: "'Source Code Pro', monospace",
-    fontSize: '32px', // Reducido un poco de 45px para que quepa seguro en móvil
-    fontWeight: '700',
-    marginBottom: '5px', 
-    lineHeight: '1'
-  };
-
-  const titleStyle = {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '14px', // Ajustado
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    marginBottom: '5px',
-    color: '#FFFFFF'
-  };
-
-  const subtitleStyle = {
-    color: '#B4A7AF',
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '11px',
-    fontWeight: '500', 
-    lineHeight: '1.3',
-    maxWidth: '95%' 
+  // ESTILOS
+  const s = {
+    container: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, 1fr)', 
+      gap: '0',
+      width: '100%',
+      height: '100%', 
+      alignItems: 'center',
+      padding: '0' 
+    },
+    card: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center', 
+      alignItems: 'center',     
+      textAlign: 'center',      
+      width: '100%',
+      height: '100%',
+      boxSizing: 'border-box',
+      borderRight: '1px solid rgba(255,255,255,0.1)',
+      padding: '0 10px'
+    },
+    lastCard: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center', 
+      alignItems: 'center',     
+      textAlign: 'center',      
+      width: '100%',
+      height: '100%',
+      boxSizing: 'border-box',
+      borderRight: 'none',
+      padding: '0 10px'
+    },
+    number: {
+      color: '#A020F0', 
+      fontFamily: "'Source Code Pro', monospace",
+      fontSize: 'clamp(28px, 3vw, 42px)', // Responsive
+      fontWeight: '700',
+      marginBottom: '5px', 
+      lineHeight: '1'
+    },
+    title: {
+      fontFamily: "'Inter', sans-serif",
+      fontSize: '14px',
+      fontWeight: '700',
+      textTransform: 'uppercase',
+      letterSpacing: '0.5px',
+      marginBottom: '5px',
+      color: '#FFFFFF'
+    },
+    subtitle: {
+      color: '#B4A7AF',
+      fontFamily: "'Inter', sans-serif",
+      fontSize: '11px',
+      fontWeight: '500', 
+      lineHeight: '1.3',
+      maxWidth: '90%' 
+    }
   };
 
   return (
-    <div style={responsiveGridStyle}>
-      
-      <div style={cardStyle}>
-        <div style={numberStyle}>{totalRutas}</div>
-        <div style={titleStyle}>RUTAS DE CUIDADO</div>
-        <div style={subtitleStyle}>Vinculadas directamente a equipamiento</div>
+    <div style={s.container}>
+      <div style={s.card}>
+        <div style={s.number}>{totalRutas}</div>
+        <div style={s.title}>RUTAS DE CUIDADO</div>
+        <div style={s.subtitle}>Vinculadas directamente a equipamiento</div>
       </div>
-
-      <div style={cardStyle}>
-        <div style={numberStyle}>{Math.round(kmTotal)} km</div>
-        <div style={{...titleStyle, color: COLORS.rutas.Oyamel}}>DE CONEXIÓN</div>
-        <div style={subtitleStyle}>Uniendo la zona alta de difícil acceso</div>
+      <div style={s.card}>
+        <div style={s.number}>{Math.round(kmTotal)} km</div>
+        <div style={{...s.title, color: COLORS.rutas.Oyamel}}>DE CONEXIÓN</div>
+        <div style={s.subtitle}>Uniendo la zona alta de difícil acceso</div>
       </div>
-
-      <div style={cardStyle}>
-        <div style={numberStyle}>+{demandaTotal.toLocaleString()}</div>
-        <div style={{...titleStyle, color: COLORS.rutas.Antigua}}>USUARIAS</div>
-        <div style={subtitleStyle}>Beneficiadas diariamente</div>
+      <div style={s.card}>
+        <div style={s.number}>+{demandaTotal.toLocaleString()}</div>
+        <div style={{...s.title, color: COLORS.rutas.Antigua}}>USUARIAS</div>
+        <div style={s.subtitle}>Beneficiadas por el servicio diariamente</div>
       </div>
-
-      <div style={{...cardStyle, borderRight: 'none'}}>
-        <div style={numberStyle}>{Math.round(maxSaturacion)}%</div>
-        <div style={{...titleStyle, color: COLORS.rutas.Ocotal}}>ALTA DEMANDA</div>
-        <div style={subtitleStyle}>Necesidad supera capacidad</div>
+      <div style={s.lastCard}>
+        <div style={s.number}>{Math.round(maxSaturacion)}%</div>
+        <div style={{...s.title, color: COLORS.rutas.Ocotal}}>ALTA DEMANDA</div>
+        <div style={s.subtitle}>Necesidad supera capacidad en hora pico</div>
       </div>
-
     </div>
   );
 }
