@@ -199,16 +199,16 @@ export default function MapComponent() {
     left: '20px',
     padding: '15px',
     width: '200px', 
-    // CAJA SIMBOLOGÍA CLAVE: Color #181d35 con 30% de opacidad
-    backgroundColor: 'rgba(24, 29, 53, 0.3)', 
+    // CAJA SIMBOLOGÍA
+    backgroundColor: 'rgba(37, 41, 62, 0.12)', 
     border: '1px solid rgba(255,255,255,0.1)',
     borderRadius: '8px',
     color: 'white',
     fontFamily: FONTS.title,
     fontSize: '11px',
     zIndex: 10,
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)'
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)'
   };
 
   const titleStyle = { margin: '0 0 10px 0', fontSize: '18px', fontWeight: 'bold', color: '#ccc', letterSpacing: '1px' };
