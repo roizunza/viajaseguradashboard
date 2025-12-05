@@ -172,12 +172,12 @@ export default function Sidebar() {
           </p>
           <div style={{ marginBottom: '10px', borderLeft: '2px solid rgba(255,255,255,0.3)', paddingLeft: '8px' }}>
             <p style={s.bodyText}>
-              <span style={s.listKey}>Puente vital:</span> La ruta funciona conecta zonas altas de difícil acceso (Oyamel, Antigua, Ocotal) con avenidas principales como el Blvd. Adolfo López Mateos y lugares clave como Ciudad Universitaria.
+              <span style={s.listKey}>Puente vital:</span> La ruta conecta zonas altas de difícil acceso (Oyamel, Antigua, Ocotal) con avenidas principales como el Blvd. Adolfo López Mateos y lugares clave como Ciudad Universitaria.
             </p>
           </div>
           <div style={{ borderLeft: '2px solid rgba(255,255,255,0.3)', paddingLeft: '8px' }}>
             <p style={s.bodyText}>
-              <span style={s.listKey}>Soporte de vida:</span> Los puntos de mayor afluencia coinciden con escuelas y mercados, validando que el servicio sostiene las actividades cotidianas en la vida de mujeres e infancias.
+              <span style={s.listKey}>Soporte de vida:</span> Los puntos de mayor afluencia coinciden con escuelas, validando que el servicio sostiene actividades cotidianas en la vida de mujeres e infancias.
             </p>
           </div>
         </div>
@@ -190,7 +190,7 @@ export default function Sidebar() {
             <span style={s.tag}>#Impacto</span>
           </div>
           <p style={s.bodyText}>
-            Decidí codificar esta investigación en un Dashboard Interactivo para democratizar el acceso a la evidencia. Mi motivación nace de creer en la gestión de esta información como la una vía para poner las necesidades de las mujeres y las infancias sobre la mesa; necesitamos datos que nos ayuden a reconfigurar la movilidad no solo para movernos más rápido, sino para cuidar mejor a quienes nos cuidan.
+            Decidí codificar esta investigación en un Dashboard Interactivo para democratizar el acceso a la evidencia. Mi motivación nace de creer en la gestión de esta información como una vía para poner las necesidades de las mujeres e infancias sobre la mesa; necesitamos datos que nos ayuden a reconfigurar la movilidad no solo para movernos más rápido, sino para cuidar mejor a quienes nos cuidan.
           </p>
         </div>
       </div>

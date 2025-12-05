@@ -89,7 +89,7 @@ export default function ChartsContainer() {
       {/* IZQUIERDA: FLUJO */}
       <div style={styles.leftSection}>
         <div style={styles.header}>
-          <div style={styles.title}>Dinámica de demanda: ascensos vs descensos</div>
+          <div style={styles.title}>Dinámica de demanda</div>
           <div style={styles.legend}>
             <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot('#F976C7')}></span> Ascensos</div>
             <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot(COLORS.descensos)}></span> Descensos</div>
