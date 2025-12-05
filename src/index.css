@@ -16,9 +16,10 @@ body {
   background-color: var(--bg-app);
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
-  overflow: hidden;
+  overflow: hidden; 
 }
 
+/* LAYOUT ESCRITORIO */
 .app-grid {
   display: grid;
   width: 100vw;
@@ -53,3 +54,39 @@ body {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb { background: #232737; border-radius: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
+
+/* --- RESPONSIVIDAD */
+@media (max-width: 1024px) {
+  body {
+    overflow-y: auto; 
+  }
+
+  .app-grid {
+    display: flex;
+    flex-direction: column; 
+    height: auto;
+    min-height: 100vh;
+    gap: 20px;
+    padding: 15px;
+  }
+
+  
+  .panel-top { 
+    order: 1; 
+    height: 500px; 
+    min-height: 500px;
+  }
+
+  .panel-bottom { 
+    order: 2; 
+    height: auto; 
+    min-height: 600px; 
+  }
+
+  .panel-sidebar { 
+    order: 3; 
+    height: auto;
+    min-height: 500px; 
+    border-right: none; 
+  }
+}

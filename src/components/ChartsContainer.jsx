@@ -10,7 +10,7 @@ import equipData from '../data/equipamiento.json';
 
 export default function ChartsContainer() {
 
-  // PROCESAMIENTO DE DATOS
+  // PROCESAMIENTO
   const processRouteData = (rutaName) => {
     return paradasData.features
       .filter(f => f.properties.origen_destino.includes(rutaName))
@@ -54,8 +54,7 @@ export default function ChartsContainer() {
     }));
   }, []);
 
-  // ESTILOS Y COMPONENTES
-  
+  // COMPONENTES
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -96,52 +95,17 @@ export default function ChartsContainer() {
     );
   };
 
-  const headerContainerStyle = {
-    display: 'flex', 
-    justifyContent: 'space-between', 
-    alignItems: 'center', 
-    borderBottom: '1px solid rgba(255,255,255,0.1)', 
-    marginBottom: '10px',
-    paddingBottom: '10px'
-  };
-
-  const sectionTitleStyle = {
-    fontFamily: FONTS.body,
-    fontSize: '18px',
-    fontWeight: '700',
-    color: '#FFFFFF',
-    margin: 0,
-    letterSpacing: '0.5px'
-  };
-
-  const subChartTitleStyle = {
-    fontFamily: FONTS.title,
-    fontSize: '13px',
-    color: '#B0B3B8',
-    marginTop: '8px', 
-    textAlign: 'center', 
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    fontWeight: 'bold'
-  };
-
-  const legendContainerStyle = {
-    display: 'flex',
-    gap: '15px',
-    fontSize: '13px',
-    fontFamily: FONTS.body,
-    color: '#FFFFFF',
-    marginRight: '10px' 
-  };
-
-  const dotStyle = (color, opacity = 1) => ({
-    width: '8px', height: '8px', backgroundColor: color, opacity: opacity, borderRadius: '2px', display: 'inline-block', marginRight: '6px'
-  });
+  // ESTILOS
+  const headerContainerStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', marginBottom: '10px', paddingBottom: '10px' };
+  const sectionTitleStyle = { fontFamily: FONTS.body, fontSize: '18px', fontWeight: '700', color: '#FFFFFF', margin: 0, letterSpacing: '0.5px' };
+  const subChartTitleStyle = { fontFamily: FONTS.title, fontSize: '13px', color: '#B0B3B8', marginTop: '8px', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' };
+  const legendContainerStyle = { display: 'flex', gap: '15px', fontSize: '13px', fontFamily: FONTS.body, color: '#FFFFFF', marginRight: '10px' };
+  const dotStyle = (color) => ({ width: '8px', height: '8px', backgroundColor: color, borderRadius: '2px', display: 'inline-block', marginRight: '6px' });
 
   return (
-    <div style={{ display: 'flex', width: '100%', height: '100%', padding: '20px' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', height: '100%', padding: '20px', overflowY: 'auto' }}>
       
-      <div style={{ flex: 65, display: 'flex', flexDirection: 'column', paddingRight: '20px' }}>
+      <div style={{ flex: '2 1 600px', display: 'flex', flexDirection: 'column', paddingRight: '20px', minHeight: '300px', marginBottom: '20px' }}>
         <div style={headerContainerStyle}>
           <div style={sectionTitleStyle}>Dinámica de demanda: ascensos vs descensos</div>
           <div style={legendContainerStyle}>
@@ -197,8 +161,8 @@ export default function ChartsContainer() {
           </div>
         </div>
       </div>
-
-      <div style={{ flex: 30, display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '40px' }}>
+      
+      <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '40px', minHeight: '300px' }}>
         <div style={headerContainerStyle}>
           <div style={sectionTitleStyle}>Infraestructura de cuidados</div>
           <div style={legendContainerStyle}>

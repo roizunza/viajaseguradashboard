@@ -8,10 +8,11 @@ export default function Sidebar() {
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
-      color: '#E0E0E0'
+      color: '#E0E0E0',
+      width: '100%' 
     },
     
-    //  SUBCAJA SUPERIOR 
+    //  SUBCAJA SUPERIOR 
     headerBox: {
       backgroundColor: '#181d35',
       padding: '24px 20px',
@@ -113,12 +114,11 @@ export default function Sidebar() {
       padding: '20px',
       borderTop: '1px solid rgba(255,255,255,0.1)',
       backgroundColor: 'var(--bg-panel)'
-    },
-    // CAMBIO: 
+    }, 
     btnGithub: {
       display: 'block',
-      backgroundColor: '#0000FF', // Azul Puro
-      color: '#c5cde0ff',           // Blanco
+      backgroundColor: '#0000FF', 
+      color: '#c5cde0ff',           
       fontFamily: FONTS.numbers,
       fontSize: '18px',
       fontWeight: '700',
@@ -189,7 +189,7 @@ export default function Sidebar() {
           </div>
           <div style={s.listItem}>
             <p style={s.bodyText}>
-              <span style={s.listKey}>En el análisis:</span> Fui más allá de los puntos, generé un análisis de <strong>500 metros (caminatas breves)</strong> alrededor de las paradas. Crucé esta cobertura con equipamientos de cuidados (escuelas, mercados) para ver con qué lugares conectaba realmente la ruta.
+              <span style={s.listKey}>El análisis:</span> Fui más allá de los puntos, generé un análisis de <strong>500 metros (caminatas breves)</strong> alrededor de las paradas. Crucé esta cobertura con equipamientos de cuidados (escuelas, mercados) para ver con qué lugares conectaba realmente la ruta.
             </p>
           </div>
         </div>
@@ -235,9 +235,14 @@ export default function Sidebar() {
 
       </div>
 
-      {/* 3. BOTÓN FINAL */}
+      {/* 3. BOTÓN FINAL GITHUB */}
       <div style={s.btnContainer}>
-        <a href="https://github.com/roizunza" target="_blank" rel="noreferrer" style={s.btnGithub}>
+        <a 
+          href="https://github.com/roizunza/viajaseguradashboard" 
+          target="_blank" 
+          rel="noreferrer"
+          style={s.btnGithub}
+        >
           VER CÓDIGO EN GITHUB
         </a>
       </div>
