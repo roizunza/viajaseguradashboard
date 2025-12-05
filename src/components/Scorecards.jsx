@@ -15,51 +15,29 @@ export default function Scorecards() {
     return sat > max ? sat : max;
   }, 0);
 
-  // ESTILOS
-  const s = {
-    container: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(4, 1fr)', 
-      width: '100%',
-      height: '100%', 
-      alignItems: 'center' 
-    },
+  // Estilos internos SOLO para texto (Colores y Fuentes)
+  // El Layout (Grid/Columnas) ahora lo maneja el archivo index.css
+  const textStyles = {
     card: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center', 
       alignItems: 'center',     
-      textAlign: 'center',      
-      width: '100%',      
-      height: '70%',      
-      boxSizing: 'border-box', 
-      borderRight: '1px solid rgba(255,255,255,0.1)',
-      padding: '0 5px'    
+      textAlign: 'center',
+      height: '100%'
     },
-    lastCard: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center', 
-      alignItems: 'center',     
-      textAlign: 'center',      
-      width: '100%',
-      height: '70%',
-      boxSizing: 'border-box',
-      borderRight: 'none', 
-      padding: '0 5px'
-    },
-    // Tipografía
     number: {
       color: '#A020F0', 
       fontFamily: "'Source Code Pro', monospace",
-      fontSize: '42px', 
+      fontSize: 'clamp(28px, 4vw, 45px)', // Responsive: se achica en móvil
       fontWeight: '700',
       marginBottom: '5px', 
-      lineHeight: '1'
+      lineHeight: '1',
+      textShadow: '0 0 10px rgba(160, 32, 240, 0.3)'
     },
     title: {
       fontFamily: "'Inter', sans-serif",
-      fontSize: '15px',
+      fontSize: '14px',
       fontWeight: '700',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',
@@ -69,42 +47,39 @@ export default function Scorecards() {
     subtitle: {
       color: '#B4A7AF',
       fontFamily: "'Inter', sans-serif",
-      fontSize: '12px',
+      fontSize: '11px',
       fontWeight: '500', 
       lineHeight: '1.3',
-      maxWidth: '90%' 
+      maxWidth: '100%' 
     }
   };
 
   return (
-    <div style={s.container}>
+    // Usamos la clase CSS para controlar la rejilla responsiva
+    <div className="scorecards-grid">
       
-      {/* KPI 1 */}
-      <div style={s.card}>
-        <div style={s.number}>{totalRutas}</div>
-        <div style={s.title}>RUTAS DE CUIDADO</div>
-        <div style={s.subtitle}>Vinculadas directamente a equipamiento</div>
+      <div className="scorecard-item" style={textStyles.card}>
+        <div style={textStyles.number}>{totalRutas}</div>
+        <div style={textStyles.title}>RUTAS DE CUIDADO</div>
+        <div style={textStyles.subtitle}>Vinculadas a equipamiento</div>
       </div>
 
-      {/* KPI 2 */}
-      <div style={s.card}>
-        <div style={s.number}>{Math.round(kmTotal)} km</div>
-        <div style={{...s.title, color: COLORS.rutas.Oyamel}}>DE CONEXIÓN</div>
-        <div style={s.subtitle}>Uniendo la zona alta de difícil acceso</div>
+      <div className="scorecard-item" style={textStyles.card}>
+        <div style={textStyles.number}>{Math.round(kmTotal)} km</div>
+        <div style={{...textStyles.title, color: COLORS.rutas.Oyamel}}>DE CONEXIÓN</div>
+        <div style={textStyles.subtitle}>Uniendo zona alta y ciudad</div>
       </div>
 
-      {/* KPI 3 */}
-      <div style={s.card}>
-        <div style={s.number}>+{demandaTotal.toLocaleString()}</div>
-        <div style={{...s.title, color: COLORS.rutas.Antigua}}>USUARIAS</div>
-        <div style={s.subtitle}>Beneficiadas por el servicio diariamente</div>
+      <div className="scorecard-item" style={textStyles.card}>
+        <div style={textStyles.number}>+{demandaTotal.toLocaleString()}</div>
+        <div style={{...textStyles.title, color: COLORS.rutas.Antigua}}>USUARIAS</div>
+        <div style={textStyles.subtitle}>Beneficiadas diariamente</div>
       </div>
 
-      {/* KPI 4 */}
-      <div style={s.lastCard}>
-        <div style={s.number}>{Math.round(maxSaturacion)}%</div>
-        <div style={{...s.title, color: COLORS.rutas.Ocotal}}>ALTA DEMANDA</div>
-        <div style={s.subtitle}>Necesidad supera capacidad en hora pico</div>
+      <div className="scorecard-item" style={textStyles.card}>
+        <div style={textStyles.number}>{Math.round(maxSaturacion)}%</div>
+        <div style={{...textStyles.title, color: COLORS.rutas.Ocotal}}>ALTA DEMANDA</div>
+        <div style={textStyles.subtitle}>Necesidad supera capacidad</div>
       </div>
 
     </div>

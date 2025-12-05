@@ -192,37 +192,23 @@ export default function MapComponent() {
 
   }, []);
 
-  // Simbología
-  const legendStyle = {
-    position: 'absolute',
-    top: '20px',
-    left: '20px',
-    padding: '15px',
-    width: '205px',
-    backgroundColor: 'rgba(24, 29, 53, 0.3)', 
-    border: '1px solid rgba(255, 255, 255, 0.04)',
-    borderRadius: '8px',
-    color: 'white',
-    fontFamily: FONTS.title,
-    fontSize: '11px',
-    zIndex: 10,
-    backdropFilter: 'blur(5px)'
-  };
+// ... (Todo el código anterior del useEffect se queda igual) ...
+
+  // NOTA: Borramos la constante 'legendStyle' de aquí porque ahora está en index.css
 
   const titleStyle = { margin: '0 0 10px 0', fontSize: '18px', fontWeight: 'bold', color: '#ccc', letterSpacing: '1px' };
   const subtitleStyle = { margin: '12px 0 6px 0', fontSize: '15px', fontWeight: '500', color: '#B4A7AF' };
   const itemStyle = { display: 'flex', alignItems: 'center', marginBottom: '5px', fontSize: '12px', fontWeight: '300', marginLeft: '12px' };
-
   const dot = { width: '8px', height: '8px', borderRadius: '50%', marginRight: '10px', display: 'inline-block' };
   const line = { width: '15px', height: '4px', marginRight: '8px', display: 'inline-block' };
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       
-      
+      {/* Estilos Popups */}
       <style>{`
         .dark-popup .mapboxgl-popup-content {
-          background-color: rgba(24, 29, 53, 0.5) !important; /* Azul #181d35 al 50% */
+          background-color: rgba(24, 29, 53, 0.5) !important;
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.1);
@@ -238,7 +224,8 @@ export default function MapComponent() {
 
       <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />
 
-      <div style={legendStyle}>
+      {/* USAMOS LA CLASE CSS RESPONSIVA */}
+      <div className="map-legend">
         <h4 style={titleStyle}>SIMBOLOGÍA</h4>
         
         <div style={subtitleStyle}>Recorridos</div>

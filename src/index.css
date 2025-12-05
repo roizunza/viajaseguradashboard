@@ -1,99 +1,106 @@
+/* src/index.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono:wght@400;700&family=Source+Code+Pro:wght@600;700&display=swap');
 
 :root {
-  --bg-app: #0D0F16;       
-  --bg-panel: rgba(21, 24, 35, 0.6); 
+  --bg-app: #0D0F16;
+  --bg-panel: rgba(21, 24, 35, 0.6);
   --text-main: #E0E0E0;
   --sidebar-width: 340px;
-  --gap: 30px;             
+  --gap: 30px;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-app);
-  color: var(--text-main);
+  margin: 0; padding: 0;
+  background-color: var(--bg-app); color: var(--text-main);
   font-family: 'Inter', sans-serif;
   overflow: hidden; /* Fijo en escritorio */
 }
 
-/* --- LAYOUT MAESTRO (ESCRITORIO - INTACTO) --- */
+/* --- LAYOUT ESCRITORIO --- */
 .app-grid {
   display: grid;
-  width: 100vw;
-  height: 100vh; /* Altura total de la pantalla */
-  padding: var(--gap);
-  box-sizing: border-box;
-  gap: var(--gap);
-  
+  width: 100vw; height: 100vh;
+  padding: var(--gap); box-sizing: border-box; gap: var(--gap);
   grid-template-columns: var(--sidebar-width) 1fr;
   grid-template-rows: 65% 1fr;
-  grid-template-areas: 
-    "sidebar top-box"
-    "sidebar bottom-box";
+  grid-template-areas: "sidebar top-box" "sidebar bottom-box";
 }
 
-/* --- ESTILOS DE PANELES --- */
 .panel {
   background-color: var(--bg-panel);
-  border-radius: 12px; 
-  overflow: hidden;
-  backdrop-filter: blur(10px); 
-  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px; overflow: hidden;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  flex-direction: column;
+  display: flex; flexDirection: column;
 }
-
-/* Asignación de áreas y altura en escritorio */
-.panel-sidebar { 
-  grid-area: sidebar; 
-  height: 100%; /* Ocupa todo el alto disponible en el grid */
-  overflow: hidden; /* El scroll interno lo maneja el componente Sidebar */
-}
-
+.panel-sidebar { grid-area: sidebar; }
 .panel-top { grid-area: top-box; }
 .panel-bottom { grid-area: bottom-box; }
 
-/* Scroll */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-thumb { background: #232737; border-radius: 3px; }
-::-webkit-scrollbar-track { background: transparent; }
+/* --- CLASES RESPONSIVAS PARA COMPONENTES --- */
 
-/* --- RESPONSIVIDAD (SOLO TABLET Y MÓVIL) --- */
+/* 1. KPIS (Scorecards) */
+.scorecards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Escritorio: 4 columnas */
+  gap: 0;
+  width: 100%; height: 100%; align-items: center;
+  padding: 0 20px;
+}
+.scorecard-item {
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 0 10px;
+}
+.scorecard-item:last-child { border-right: none; }
+
+/* 2. SIMBOLOGÍA DEL MAPA */
+.map-legend {
+  position: absolute;
+  top: 20px; left: 20px; /* Escritorio: Arriba Izquierda */
+  padding: 15px; width: 240px;
+  background-color: rgba(24, 29, 53, 0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  z-index: 10;
+}
+
+/* --- MEDIA QUERIES (CELULAR Y TABLET) --- */
 @media (max-width: 1024px) {
-  
-  body {
-    overflow-y: auto; /* Permitir scroll en la página completa */
-  }
+  body { overflow-y: auto; } /* Scroll activado */
 
   .app-grid {
-    display: flex;
-    flex-direction: column;
-    height: auto;          /* Altura crece con el contenido */
-    min-height: 100vh;
-    padding: 15px;
-    gap: 20px;
-    overflow: visible;     /* Permitir que el contenido se expanda */
+    display: flex; flexDirection: column;
+    height: auto; min-height: 100vh;
+    padding: 10px; gap: 20px;
   }
 
-  /* Orden visual móvil */
-  .panel-top { 
-    order: 1; 
-    height: 500px; 
-    min-height: 500px;
-  }
+  .panel-top { order: 1; height: 600px; min-height: 600px; }
+  .panel-bottom { order: 2; height: auto; min-height: 500px; }
+  .panel-sidebar { order: 3; height: auto; border-right: none; }
 
-  .panel-bottom { 
-    order: 2; 
-    height: auto; 
-    min-height: 500px;
+  /* AJUSTES MÓVILES ESPECÍFICOS */
+  
+  /* KPIs: Cambian a 2x2 en lugar de 1x4 para que el texto quepa */
+  .scorecards-grid {
+    grid-template-columns: 1fr 1fr; /* 2 Columnas */
+    grid-template-rows: 1fr 1fr;    /* 2 Filas */
+    gap: 15px;
+    padding: 15px 10px;
   }
+  .scorecard-item {
+    border-right: none; /* Quitar bordes laterales */
+    border-bottom: 1px solid rgba(255,255,255,0.1); /* Poner bordes abajo */
+    padding-bottom: 10px;
+  }
+  .scorecard-item:nth-last-child(-n+2) { border-bottom: none; } /* Quitar borde a los últimos 2 */
 
-  .panel-sidebar { 
-    order: 3; 
-    height: auto;         /* Crece según el texto */
-    min-height: 600px;    /* Altura mínima para leer cómodo */
-    overflow: visible;    /* Dejar que el texto se muestre completo */
+  /* Simbología: Se mueve abajo para no tapar el mapa */
+  .map-legend {
+    top: auto; bottom: 20px; /* Abajo */
+    left: 50%; transform: translateX(-50%); /* Centrado */
+    width: 90%; /* Ancho adaptable */
+    max-width: 300px;
+    display: flex; flex-wrap: wrap; justify-content: space-around;
   }
 }
