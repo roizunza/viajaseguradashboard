@@ -225,7 +225,7 @@ export default function MapComponent() {
       <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />
 
       {/* USAMOS LA CLASE CSS RESPONSIVA */}
-      <div className="map-legend">
+      <div className="map-legend-container">
         <h4 style={titleStyle}>SIMBOLOGÍA</h4>
         
         <div style={subtitleStyle}>Recorridos</div>

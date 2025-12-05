@@ -1,17 +1,20 @@
-/* src/index.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono:wght@400;700&family=Source+Code+Pro:wght@600;700&display=swap');
 
 :root {
   --bg-app: #0D0F16;
   --bg-panel: rgba(21, 24, 35, 0.6);
   --text-main: #E0E0E0;
-  --sidebar-width: 340px;
+  
+  /* DIMENSIONES */
+  --sidebar-width: 350px;
   --gap: 30px;
 }
 
 body {
-  margin: 0; padding: 0;
-  background-color: var(--bg-app); color: var(--text-main);
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-app);
+  color: var(--text-main);
   font-family: 'Inter', sans-serif;
   overflow: hidden; /* Fijo en escritorio */
 }
@@ -19,88 +22,96 @@ body {
 /* --- LAYOUT ESCRITORIO --- */
 .app-grid {
   display: grid;
-  width: 100vw; height: 100vh;
-  padding: var(--gap); box-sizing: border-box; gap: var(--gap);
+  width: 100vw;
+  height: 100vh;
+  padding: var(--gap);
+  box-sizing: border-box;
+  gap: var(--gap);
+  
   grid-template-columns: var(--sidebar-width) 1fr;
   grid-template-rows: 65% 1fr;
-  grid-template-areas: "sidebar top-box" "sidebar bottom-box";
+  grid-template-areas: 
+    "sidebar top-box"
+    "sidebar bottom-box";
 }
 
 .panel {
   background-color: var(--bg-panel);
-  border-radius: 12px; overflow: hidden;
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px; 
+  overflow: hidden;
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex; flexDirection: column;
+  display: flex;
+  flex-direction: column;
 }
+
 .panel-sidebar { grid-area: sidebar; }
-.panel-top { grid-area: top-box; }
-.panel-bottom { grid-area: bottom-box; }
+.panel-top     { grid-area: top-box; }
+.panel-bottom  { grid-area: bottom-box; }
 
-/* --- CLASES RESPONSIVAS PARA COMPONENTES --- */
+/* Scroll */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: #4a4f63; border-radius: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
 
-/* 1. KPIS (Scorecards) */
-.scorecards-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Escritorio: 4 columnas */
-  gap: 0;
-  width: 100%; height: 100%; align-items: center;
-  padding: 0 20px;
-}
-.scorecard-item {
-  border-right: 1px solid rgba(255,255,255,0.1);
-  padding: 0 10px;
-}
-.scorecard-item:last-child { border-right: none; }
-
-/* 2. SIMBOLOGÍA DEL MAPA */
-.map-legend {
+/* --- CLASES PARA EL MAPA --- */
+.map-legend-container {
   position: absolute;
-  top: 20px; left: 20px; /* Escritorio: Arriba Izquierda */
-  padding: 15px; width: 240px;
-  background-color: rgba(24, 29, 53, 0.5);
+  top: 20px;
+  left: 20px;
+  padding: 15px;
+  width: 240px;
+  background-color: rgba(10, 10, 10, 0.85);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 8px;
-  backdrop-filter: blur(5px);
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
   z-index: 10;
+  backdrop-filter: blur(5px);
 }
 
-/* --- MEDIA QUERIES (CELULAR Y TABLET) --- */
+/* --- RESPONSIVIDAD (MÓVIL) --- */
 @media (max-width: 1024px) {
-  body { overflow-y: auto; } /* Scroll activado */
+  body {
+    overflow-y: auto; /* Permitir scroll */
+  }
 
   .app-grid {
-    display: flex; flexDirection: column;
-    height: auto; min-height: 100vh;
-    padding: 10px; gap: 20px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    padding: 10px;
+    gap: 20px;
   }
 
-  .panel-top { order: 1; height: 600px; min-height: 600px; }
-  .panel-bottom { order: 2; height: auto; min-height: 500px; }
-  .panel-sidebar { order: 3; height: auto; border-right: none; }
-
-  /* AJUSTES MÓVILES ESPECÍFICOS */
-  
-  /* KPIs: Cambian a 2x2 en lugar de 1x4 para que el texto quepa */
-  .scorecards-grid {
-    grid-template-columns: 1fr 1fr; /* 2 Columnas */
-    grid-template-rows: 1fr 1fr;    /* 2 Filas */
-    gap: 15px;
-    padding: 15px 10px;
+  /* Orden Visual en Celular */
+  .panel-sidebar { 
+    order: 1; /* Primero el texto (Título/Contexto/Hallazgos) */
+    height: auto; 
+    min-height: 400px; 
   }
-  .scorecard-item {
-    border-right: none; /* Quitar bordes laterales */
-    border-bottom: 1px solid rgba(255,255,255,0.1); /* Poner bordes abajo */
-    padding-bottom: 10px;
-  }
-  .scorecard-item:nth-last-child(-n+2) { border-bottom: none; } /* Quitar borde a los últimos 2 */
 
-  /* Simbología: Se mueve abajo para no tapar el mapa */
-  .map-legend {
-    top: auto; bottom: 20px; /* Abajo */
-    left: 50%; transform: translateX(-50%); /* Centrado */
-    width: 90%; /* Ancho adaptable */
-    max-width: 300px;
-    display: flex; flex-wrap: wrap; justify-content: space-around;
+  .panel-top { 
+    order: 2; /* Segundo el Mapa + KPIs */
+    height: auto; 
+    min-height: 650px; /* Espacio suficiente para mapa y KPIs apilados */
+  }
+
+  .panel-bottom { 
+    order: 3; /* Tercero las Gráficas */
+    height: auto; 
+    min-height: 800px; /* Gráficas apiladas */
+  }
+
+  /* Ajuste Simbología Móvil (Más pequeña) */
+  .map-legend-container {
+    width: 160px;
+    padding: 10px;
+    font-size: 9px;
+    transform: scale(0.9);
+    transform-origin: top left;
   }
 }
