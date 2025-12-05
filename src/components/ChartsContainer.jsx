@@ -4,15 +4,22 @@ import {
 } from 'recharts';
 import { COLORS, FONTS } from '../config/theme';
 
-// Datos
+// DATOS: Si estos imports fallan, la app truena. Verifica los nombres.
 import paradasData from '../data/paradas_r66.json';
 import equipData from '../data/equipamiento.json';
 
 export default function ChartsContainer() {
 
-  // PROCESAMIENTO DE DATOS
+  // --- SEGURIDAD: Verificar que los datos existan antes de procesar ---
+  if (!paradasData || !equipData) {
+    return <div style={{color:'white'}}>Error: Faltan datos .json en src/data</div>;
+  }
+
+  // --- 1. PROCESAMIENTO ---
   const processRouteData = (rutaName) => {
-    return paradasData.features
+    // Validación extra para evitar crash si features es undefined
+    const features = paradasData.features || [];
+    return features
       .filter(f => f.properties.origen_destino.includes(rutaName))
       .sort((a, b) => a.properties.fid - b.properties.fid)
       .map(f => ({
@@ -28,21 +35,34 @@ export default function ChartsContainer() {
   const dataAntigua = useMemo(() => processRouteData('Antigua'), []);
 
   const dataEquip = useMemo(() => {
-    const counts = { Oyamel: { Educ: 0, Salud: 0, Abasto: 0 }, Ocotal: { Educ: 0, Salud: 0, Abasto: 0 }, Antigua: { Educ: 0, Salud: 0, Abasto: 0 } };
-    equipData.features.forEach(f => {
+    const counts = {
+      Oyamel: { Educ: 0, Salud: 0, Abasto: 0 },
+      Ocotal: { Educ: 0, Salud: 0, Abasto: 0 },
+      Antigua: { Educ: 0, Salud: 0, Abasto: 0 }
+    };
+
+    const features = equipData.features || [];
+    features.forEach(f => {
       const props = f.properties;
       let r = 'Oyamel';
-      if (props.origen_destino.includes('Ocotal')) r = 'Ocotal';
-      if (props.origen_destino.includes('Antigua')) r = 'Antigua';
+      if (props.origen_destino && props.origen_destino.includes('Ocotal')) r = 'Ocotal';
+      if (props.origen_destino && props.origen_destino.includes('Antigua')) r = 'Antigua';
+
       const tipo = props.equipamiento;
       if (tipo === 'EDUCATIVO') counts[r].Educ++;
       if (tipo === 'SALUD') counts[r].Salud++;
       if (tipo === 'ABASTO') counts[r].Abasto++;
     });
-    return Object.keys(counts).map(key => ({ name: key, Educación: counts[key].Educ, Salud: counts[key].Salud, Abasto: counts[key].Abasto }));
+
+    return Object.keys(counts).map(key => ({
+      name: key,
+      Educación: counts[key].Educ,
+      Salud: counts[key].Salud,
+      Abasto: counts[key].Abasto
+    }));
   }, []);
 
-  // COMPONENTES VISUALES
+  // --- COMPONENTES VISUALES ---
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -74,59 +94,20 @@ export default function ChartsContainer() {
     );
   };
 
-  const headerContainerStyle = {
-    display: 'flex', 
-    flexDirection: 'column', 
-    alignItems: 'flex-start', 
-    borderBottom: '1px solid rgba(255,255,255,0.1)', 
-    marginBottom: '15px',
-    paddingBottom: '10px',
-    gap: '8px' 
-  };
-
-  const sectionTitleStyle = {
-    fontFamily: FONTS.body,
-    fontSize: '18px',
-    fontWeight: '700',
-    color: '#FFFFFF',
-    margin: 0,
-    letterSpacing: '0.5px',
-    width: '100%' 
-  };
-
-  const legendContainerStyle = {
-    display: 'flex',
-    gap: '15px',
-    fontSize: '13px',
-    fontFamily: FONTS.body,
-    color: '#FFFFFF',
-    flexWrap: 'wrap' 
-  };
-
-  const subChartTitleStyle = {
-    fontFamily: FONTS.title,
-    fontSize: '13px',
-    color: '#B0B3B8',
-    marginTop: '8px', 
-    textAlign: 'center', 
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    fontWeight: 'bold'
-  };
-
-  const dotStyle = (color, opacity = 1) => ({
-    width: '8px', height: '8px', backgroundColor: color, opacity: opacity, borderRadius: '2px', display: 'inline-block', marginRight: '6px'
-  });
+  // Estilos
+  const headerContainerStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', marginBottom: '10px', paddingBottom: '10px' };
+  const sectionTitleStyle = { fontFamily: FONTS.body, fontSize: '18px', fontWeight: '700', color: '#FFFFFF', margin: 0, letterSpacing: '0.5px' };
+  const subChartTitleStyle = { fontFamily: FONTS.title, fontSize: '13px', color: '#B0B3B8', marginTop: '8px', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' };
+  const legendContainerStyle = { display: 'flex', gap: '15px', fontSize: '13px', fontFamily: FONTS.body, color: '#FFFFFF', marginRight: '10px' };
+  const dotStyle = (color) => ({ width: '8px', height: '8px', backgroundColor: color, borderRadius: '2px', display: 'inline-block', marginRight: '6px' });
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', height: '100%', padding: '20px', overflowY: 'auto' }}>
+    <div style={{ display: 'flex', width: '100%', height: '100%', padding: '20px' }}>
       
-      {/* IZQUIERDA */}
-      <div style={{ flex: '2 1 600px', display: 'flex', flexDirection: 'column', paddingRight: '20px', minHeight: '300px', marginBottom: '20px' }}>
-        
-        {/* Header */}
+      {/* IZQUIERDA: FLUJO */}
+      <div style={{ flex: 65, display: 'flex', flexDirection: 'column', paddingRight: '20px' }}>
         <div style={headerContainerStyle}>
-          <div style={sectionTitleStyle}>Dinámica de demanda: ascensos vs descensos</div>
+          <div style={sectionTitleStyle}>Dinámica de demanda</div>
           <div style={legendContainerStyle}>
             <div style={{ display: 'flex', alignItems: 'center' }}><span style={dotStyle('#F976C7')}></span> Ascensos</div>
             <div style={{ display: 'flex', alignItems: 'center' }}><span style={dotStyle(COLORS.descensos)}></span> Descensos</div>
@@ -153,16 +134,14 @@ export default function ChartsContainer() {
         </div>
       </div>
 
-      {/* DERECHA */}
-      <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '40px', minHeight: '300px' }}>
-        
-        {/* Header */}
+      {/* DERECHA: INFRAESTRUCTURA */}
+      <div style={{ flex: 35, display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '40px' }}>
         <div style={headerContainerStyle}>
-          <div style={sectionTitleStyle}>Infraestructura de cuidados</div>
+          <div style={sectionTitleStyle}>Infraestructura</div>
           <div style={legendContainerStyle}>
-            <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot(COLORS.equipamiento.EDUCATIVO)}></span> Educación</div>
-            <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot(COLORS.equipamiento.SALUD)}></span> Salud</div>
-            <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot(COLORS.equipamiento.ABASTO)}></span> Abasto</div>
+            <div style={{ display: 'flex', alignItems: 'center' }}><span style={dotStyle(COLORS.equipamiento.EDUCATIVO)}></span> Educación</div>
+            <div style={{ display: 'flex', alignItems: 'center' }}><span style={dotStyle(COLORS.equipamiento.SALUD)}></span> Salud</div>
+            <div style={{ display: 'flex', alignItems: 'center' }}><span style={dotStyle(COLORS.equipamiento.ABASTO)}></span> Abasto</div>
           </div>
         </div>
         
