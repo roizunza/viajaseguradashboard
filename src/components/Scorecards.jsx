@@ -4,7 +4,7 @@ import recorridosData from '../data/recorridos.json';
 
 export default function Scorecards() {
   
-  // CÁLCULOS (Igual que antes)
+  // CÁLCULOS
   const features = recorridosData?.features || [];
   const totalRutas = features.length;
   const kmTotal = features.reduce((acc, ruta) => acc + (ruta.properties.Longitud_km || 0), 0);
@@ -19,7 +19,6 @@ export default function Scorecards() {
   const s = {
     container: {
       display: 'grid',
-      // En móvil (menos de 700px) se hacen 2 columnas, en escritorio 4.
       gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', 
       gap: '10px',
       width: '100%',
@@ -36,7 +35,6 @@ export default function Scorecards() {
       width: '100%',
       height: '100%',
       padding: '0 5px',
-      // Borde derecho sutil, se quita en móvil con CSS si fuera necesario, pero aquí lo dejamos simple
       borderRight: '1px solid rgba(255,255,255,0.1)'
     },
     lastCard: {
@@ -50,7 +48,6 @@ export default function Scorecards() {
       padding: '0 5px',
       borderRight: 'none'
     },
-    // NÚMERO: CLAMP (Mínimo 24px, Ideal 3vw, Máximo 42px)
     number: {
       color: '#A020F0', 
       fontFamily: "'Source Code Pro', monospace",
@@ -59,7 +56,6 @@ export default function Scorecards() {
       marginBottom: '4px', 
       lineHeight: '1'
     },
-    // TÍTULO: CLAMP (Mínimo 10px, Máximo 14px)
     title: {
       fontFamily: "'Inter', sans-serif",
       fontSize: 'clamp(10px, 1.5vw, 14px)', 
@@ -68,9 +64,8 @@ export default function Scorecards() {
       letterSpacing: '0.5px',
       marginBottom: '4px',
       color: '#FFFFFF',
-      whiteSpace: 'nowrap' // Evita que se rompa en dos líneas si es posible
+      whiteSpace: 'nowrap' 
     },
-    // SUBTÍTULO: Pequeño y legible
     subtitle: {
       color: '#B4A7AF',
       fontFamily: "'Inter', sans-serif",

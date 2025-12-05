@@ -8,7 +8,6 @@ import equipData from '../data/equipamiento.json';
 
 export default function ChartsContainer() {
 
-  // (Lógica de datos igual que antes...)
   const processRouteData = (rutaName) => {
     return paradasData.features
       .filter(f => f.properties.origen_destino.includes(rutaName))
@@ -39,7 +38,6 @@ export default function ChartsContainer() {
     return Object.keys(counts).map(key => ({ name: key, Educación: counts[key].Educ, Salud: counts[key].Salud, Abasto: counts[key].Abasto }));
   }, []);
 
-  // COMPONENTES VISUALES (Tooltip, Axis...)
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -73,10 +71,8 @@ export default function ChartsContainer() {
 
   // ESTILOS RESPONSIVOS
   const styles = {
-    // CAMBIO CLAVE: flexWrap permite que bajen en móvil
     container: { display: 'flex', flexWrap: 'wrap', width: '100%', height: '100%', padding: '20px', overflowY: 'auto' },
     
-    // CAMBIO: minHeight asegura que se vean en móvil. flex-basis asegura ancho.
     leftSection: { flex: '2 1 600px', display: 'flex', flexDirection: 'column', paddingRight: '20px', minHeight: '300px', marginBottom: '20px' },
     rightSection: { flex: '1 1 300px', display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '30px', minHeight: '300px' },
     
@@ -90,7 +86,6 @@ export default function ChartsContainer() {
   return (
     <div style={styles.container}>
       
-      {/* IZQUIERDA: FLUJO */}
       <div style={styles.leftSection}>
         <div style={styles.header}>
           <div style={styles.title}>Dinámica de demanda: ascensos vs descensos</div>
@@ -120,7 +115,6 @@ export default function ChartsContainer() {
         </div>
       </div>
 
-      {/* DERECHA: INFRAESTRUCTURA */}
       <div style={styles.rightSection}>
         <div style={styles.header}>
           <div style={styles.title}>Infraestructura de cuidados</div>

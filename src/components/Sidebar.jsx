@@ -155,7 +155,7 @@ export default function Sidebar() {
           </div>
           <div style={s.listItem}>
             <p style={s.bodyText}>
-              <span style={s.listKey}>El análisis:</span> Fui más allá de los puntos, generé un análisis de <strong>500 metros (caminatas breves)</strong> alrededor de las paradas. Crucé esta cobertura con equipamientos de cuidados (escuelas, mercados) para ver con qué lugares conectaba realmente la ruta.
+              <span style={s.listKey}>En el análisis:</span> Fui más allá de los puntos, generé un análisis de 500 metros (caminatas breves) alrededor de las paradas. Crucé esta cobertura con equipamientos de cuidados (escuelas, mercados) para ver con qué lugares conectaba realmente la ruta.
             </p>
           </div>
         </div>

@@ -192,29 +192,24 @@ export default function MapComponent() {
 
   }, []);
 
-// ... (Todo el código anterior del useEffect se queda igual) ...
-
-  // --- SIMBOLOGÍA (Corrección Glassmorphism) ---
+  // SIMBOLOGÍA 
   const legendStyle = {
     position: 'absolute',
     top: '20px',
     left: '20px',
     padding: '15px',
-    width: '200px', // Un poco más angosto para móviles
-    // CLAVE: Color #181d35 con 60% de transparencia
-    backgroundColor: 'rgba(24, 29, 53, 0.6)', 
+    width: '200px', 
+    // CAJA SIMBOLOGÍA CLAVE: Color #181d35 con 50% de transparencia
+    backgroundColor: 'rgba(24, 29, 53, 0.5)', 
     border: '1px solid rgba(255,255,255,0.1)',
     borderRadius: '8px',
     color: 'white',
     fontFamily: FONTS.title,
     fontSize: '11px',
     zIndex: 10,
-    // CLAVE: El efecto borroso
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)'
   };
-  
-  // NOTA: Borramos la constante 'legendStyle' de aquí porque ahora está en index.css
 
   const titleStyle = { margin: '0 0 10px 0', fontSize: '18px', fontWeight: 'bold', color: '#ccc', letterSpacing: '1px' };
   const subtitleStyle = { margin: '12px 0 6px 0', fontSize: '15px', fontWeight: '500', color: '#B4A7AF' };
@@ -244,7 +239,7 @@ export default function MapComponent() {
 
       <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />
 
-      {/* USAMOS LA CLASE CSS RESPONSIVA */}
+      {/* CSS RESPONSIVO */}
       <div className="map-legend-container">
         <h4 style={titleStyle}>SIMBOLOGÍA</h4>
         

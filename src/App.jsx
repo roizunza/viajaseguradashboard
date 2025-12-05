@@ -17,12 +17,12 @@ function App() {
       {/* CAJA 2: SUPERIOR (Mapa ARRIBA + KPIs ABAJO) */}
       <section className="panel panel-top" style={{ display: 'flex', flexDirection: 'column' }}>
         
-        {/* EL MAPA: Ocupa todo el espacio disponible (flex: 1) */}
+        {/* EL MAPA */}
         <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
           <MapComponent />
         </div>
 
-        {/* LOS KPIs: Altura fija abajo (no flotante) */}
+        {/* LOS KPIs */}
         <div className="kpi-container">
           <Scorecards />
         </div>
