@@ -10,7 +10,7 @@ import equipData from '../data/equipamiento.json';
 
 export default function ChartsContainer() {
 
-  // --- 1. PROCESAMIENTO DE DATOS ---
+  // PROCESAMIENTO DE DATOS
   const processRouteData = (rutaName) => {
     return paradasData.features
       .filter(f => f.properties.origen_destino.includes(rutaName))
@@ -54,8 +54,7 @@ export default function ChartsContainer() {
     }));
   }, []);
 
-  // --- 2. COMPONENTES VISUALES ---
-  
+  // ESTILOS Y COMPONENTES
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -89,14 +88,13 @@ export default function ChartsContainer() {
 
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={15} textAnchor="middle" fill={color} fontFamily={FONTS.title} fontSize={13} fontWeight="bold">
+        <text x={0} y={0} dy={12} textAnchor="middle" fill={color} fontFamily={FONTS.title} fontSize={13} fontWeight="bold">
           {payload.value.toUpperCase()}
         </text>
       </g>
     );
   };
 
-  // ESTILOS
   const headerContainerStyle = {
     display: 'flex', 
     justifyContent: 'space-between', 
@@ -140,11 +138,10 @@ export default function ChartsContainer() {
   });
 
   return (
-    // CAMBIO: flexWrap permite que bajen en celular
-    <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', height: '100%', padding: '20px', overflowY: 'auto' }}>
+    <div style={{ display: 'flex', width: '100%', height: '100%', padding: '20px' }}>
       
-      {/* IZQUIERDA: FLUJO (Flex basis asegura responsividad) */}
-      <div style={{ flex: '2 1 600px', display: 'flex', flexDirection: 'column', paddingRight: '20px', minHeight: '300px', marginBottom: '20px' }}>
+      {/* --- SECCIÓN IZQUIERDA: FLUJO --- */}
+      <div style={{ flex: 65, display: 'flex', flexDirection: 'column', paddingRight: '20px' }}>
         <div style={headerContainerStyle}>
           <div style={sectionTitleStyle}>Dinámica de demanda: ascensos vs descensos</div>
           <div style={legendContainerStyle}>
@@ -154,6 +151,7 @@ export default function ChartsContainer() {
         </div>
         
         <div style={{ display: 'flex', flex: 1, gap: '2px' }}> 
+          
           {/* Oyamel */}
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <div style={{ flex: 1, minHeight: 0 }}>
@@ -167,6 +165,7 @@ export default function ChartsContainer() {
                 </BarChart>
               </ResponsiveContainer>
             </div>
+            {/* CORREGIDO: Cerramos correctamente las llaves de style */}
             <div style={{...subChartTitleStyle, color: COLORS.rutas.Oyamel}}>Oyamel</div>
           </div>
 
@@ -205,7 +204,7 @@ export default function ChartsContainer() {
       </div>
 
       {/* DERECHA: INFRAESTRUCTURA */}
-      <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '40px', minHeight: '300px' }}>
+      <div style={{ flex: 35, display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '40px' }}>
         <div style={headerContainerStyle}>
           <div style={sectionTitleStyle}>Infraestructura de cuidados</div>
           <div style={legendContainerStyle}>

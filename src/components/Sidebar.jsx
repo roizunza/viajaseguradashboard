@@ -62,7 +62,9 @@ export default function Sidebar() {
     },
     
     // SECCIONES
-    sectionContainer: { marginBottom: '35px' },
+    sectionContainer: {
+      marginBottom: '35px'
+    },
     sectionTitle: {
       fontFamily: FONTS.body,
       fontSize: '17px',
@@ -75,14 +77,10 @@ export default function Sidebar() {
     dividerLine: { height: '1px', backgroundColor: 'rgba(188, 186, 192, 0.43)', flexGrow: 1, marginRight: '10px' },
     tag: { fontFamily: FONTS.title, fontSize: '11.5px', color: '#7c7889ff', whiteSpace: 'nowrap' },
     bodyText: { fontFamily: FONTS.body, fontSize: '16px', fontWeight: '400', lineHeight: '1.3', color: '#E0E0E0', marginBottom: '11px' },
-    listItem: { marginBottom: '11px' },
+    listItem: { marginBottom: '10px' },
+    listKey: { color: '#FFFFFF', fontWeight: '500' },
     
-    listKey: { 
-      color: '#FFFFFF', 
-      fontWeight: '700' 
-    },
-    
-    // BOTÓN
+    // BOTÓN GITHUB
     btnContainer: {
       padding: '20px',
       borderTop: '1px solid rgba(255,255,255,0.1)',
@@ -107,7 +105,7 @@ export default function Sidebar() {
   return (
     <div style={s.container}>
       
-      {/* HEADER */}
+      {/* 1. ENCABEZADO */}
       <div style={s.headerBox}>
         <h2 style={s.subHeader}>EVALUACIÓN PROGRAMA PILOTO</h2>
         <h1 style={s.mainTitle}>VIAJA SEGURA</h1>
@@ -117,7 +115,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* BODY */}
+      {/* 2. NARRATIVA */}
       <div style={s.contentBody} className="custom-scrollbar">
         
         {/* Contexto */}
@@ -157,7 +155,7 @@ export default function Sidebar() {
           </div>
           <div style={s.listItem}>
             <p style={s.bodyText}>
-              <span style={s.listKey}>En el análisis:</span> Fui más allá de los puntos, generé un análisis de 500 metros (caminatas breves) alrededor de las paradas. Crucé esta cobertura con equipamientos de cuidados (escuelas, mercados) para ver con qué lugares conectaba realmente la ruta.
+              <span style={s.listKey}>El análisis:</span> Fui más allá de los puntos, generé un análisis de <strong>500 metros (caminatas breves)</strong> alrededor de las paradas. Crucé esta cobertura con equipamientos de cuidados (escuelas, mercados) para ver con qué lugares conectaba realmente la ruta.
             </p>
           </div>
         </div>
@@ -192,17 +190,23 @@ export default function Sidebar() {
             <span style={s.tag}>#Impacto</span>
           </div>
           <p style={s.bodyText}>
-            Decidí codificar esta investigación en un Dashboard Interactivo para democratizar el acceso a la evidencia. Mi motivación nace de creer en la gestión de esta información como una vía para poner las necesidades de las mujeres y las infancias sobre la mesa; necesitamos datos que nos ayuden a reconfigurar la movilidad no solo para movernos más rápido, sino para cuidar mejor a quienes nos cuidan.
+            Decidí codificar esta investigación en un Dashboard Interactivo para democratizar el acceso a la evidencia. Mi motivación nace de creer en la gestión de esta información como la una vía para poner las necesidades de las mujeres y las infancias sobre la mesa; necesitamos datos que nos ayuden a reconfigurar la movilidad no solo para movernos más rápido, sino para cuidar mejor a quienes nos cuidan.
           </p>
         </div>
       </div>
 
-      {/* BOTÓN */}
+      {/* BOTÓN FINAL (ENLACE VINCULADO) */}
       <div style={s.btnContainer}>
-        <a href="https://github.com/roizunza/viajaseguradashboard" target="_blank" rel="noreferrer" style={s.btnGithub}>
+        <a 
+          href="https://github.com/roizunza/viajaseguradashboard" 
+          target="_blank" 
+          rel="noreferrer"
+          style={s.btnGithub}
+        >
           VER CÓDIGO EN GITHUB
         </a>
       </div>
+
     </div>
   );
 }
