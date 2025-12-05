@@ -3,11 +3,14 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer
 } from 'recharts';
 import { COLORS, FONTS } from '../config/theme';
+
+// Datos
 import paradasData from '../data/paradas_r66.json';
 import equipData from '../data/equipamiento.json';
 
 export default function ChartsContainer() {
 
+  // PROCESAMIENTO DE DATOS
   const processRouteData = (rutaName) => {
     return paradasData.features
       .filter(f => f.properties.origen_destino.includes(rutaName))
@@ -19,6 +22,7 @@ export default function ChartsContainer() {
         DescensosReal: f.properties.descensos 
       }));
   };
+
   const dataOyamel = useMemo(() => processRouteData('Oyamel'), []);
   const dataOcotal = useMemo(() => processRouteData('Ocotal'), []);
   const dataAntigua = useMemo(() => processRouteData('Antigua'), []);
@@ -38,6 +42,7 @@ export default function ChartsContainer() {
     return Object.keys(counts).map(key => ({ name: key, Educación: counts[key].Educ, Salud: counts[key].Salud, Abasto: counts[key].Abasto }));
   }, []);
 
+  // COMPONENTES VISUALES
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -69,29 +74,62 @@ export default function ChartsContainer() {
     );
   };
 
-  // ESTILOS RESPONSIVOS
-  const styles = {
-    container: { display: 'flex', flexWrap: 'wrap', width: '100%', height: '100%', padding: '20px', overflowY: 'auto' },
-    
-    leftSection: { flex: '2 1 600px', display: 'flex', flexDirection: 'column', paddingRight: '20px', minHeight: '300px', marginBottom: '20px' },
-    rightSection: { flex: '1 1 300px', display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '30px', minHeight: '300px' },
-    
-    header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', marginBottom: '10px', paddingBottom: '10px' },
-    title: { fontFamily: FONTS.body, fontSize: '16px', fontWeight: '700', color: '#FFFFFF', margin: 0, letterSpacing: '0.5px' },
-    legend: { display: 'flex', gap: '15px', fontSize: '13px', fontFamily: FONTS.body, color: '#FFFFFF', marginRight: '10px' },
-    subTitle: { fontFamily: FONTS.title, fontSize: '13px', color: '#B0B3B8', marginTop: '8px', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' },
-    dot: (color) => ({ width: '8px', height: '8px', backgroundColor: color, borderRadius: '2px', display: 'inline-block', marginRight: '6px' })
+  const headerContainerStyle = {
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: 'flex-start', 
+    borderBottom: '1px solid rgba(255,255,255,0.1)', 
+    marginBottom: '15px',
+    paddingBottom: '10px',
+    gap: '8px' 
   };
 
+  const sectionTitleStyle = {
+    fontFamily: FONTS.body,
+    fontSize: '18px',
+    fontWeight: '700',
+    color: '#FFFFFF',
+    margin: 0,
+    letterSpacing: '0.5px',
+    width: '100%' 
+  };
+
+  const legendContainerStyle = {
+    display: 'flex',
+    gap: '15px',
+    fontSize: '13px',
+    fontFamily: FONTS.body,
+    color: '#FFFFFF',
+    flexWrap: 'wrap' 
+  };
+
+  const subChartTitleStyle = {
+    fontFamily: FONTS.title,
+    fontSize: '13px',
+    color: '#B0B3B8',
+    marginTop: '8px', 
+    textAlign: 'center', 
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    fontWeight: 'bold'
+  };
+
+  const dotStyle = (color, opacity = 1) => ({
+    width: '8px', height: '8px', backgroundColor: color, opacity: opacity, borderRadius: '2px', display: 'inline-block', marginRight: '6px'
+  });
+
   return (
-    <div style={styles.container}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', height: '100%', padding: '20px', overflowY: 'auto' }}>
       
-      <div style={styles.leftSection}>
-        <div style={styles.header}>
-          <div style={styles.title}>Dinámica de demanda: ascensos vs descensos</div>
-          <div style={styles.legend}>
-            <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot('#F976C7')}></span> Ascensos</div>
-            <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot(COLORS.descensos)}></span> Descensos</div>
+      {/* IZQUIERDA */}
+      <div style={{ flex: '2 1 600px', display: 'flex', flexDirection: 'column', paddingRight: '20px', minHeight: '300px', marginBottom: '20px' }}>
+        
+        {/* Header */}
+        <div style={headerContainerStyle}>
+          <div style={sectionTitleStyle}>Dinámica de demanda: ascensos vs descensos</div>
+          <div style={legendContainerStyle}>
+            <div style={{ display: 'flex', alignItems: 'center' }}><span style={dotStyle('#F976C7')}></span> Ascensos</div>
+            <div style={{ display: 'flex', alignItems: 'center' }}><span style={dotStyle(COLORS.descensos)}></span> Descensos</div>
           </div>
         </div>
         
@@ -109,16 +147,19 @@ export default function ChartsContainer() {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-              <div style={{...styles.subTitle, color: ruta.c}}>{ruta.t}</div>
+              <div style={{...subChartTitleStyle, color: ruta.c}}>{ruta.t}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <div style={styles.rightSection}>
-        <div style={styles.header}>
-          <div style={styles.title}>Infraestructura de cuidados</div>
-          <div style={styles.legend}>
+      {/* DERECHA */}
+      <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '40px', minHeight: '300px' }}>
+        
+        {/* Header */}
+        <div style={headerContainerStyle}>
+          <div style={sectionTitleStyle}>Infraestructura de cuidados</div>
+          <div style={legendContainerStyle}>
             <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot(COLORS.equipamiento.EDUCATIVO)}></span> Educación</div>
             <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot(COLORS.equipamiento.SALUD)}></span> Salud</div>
             <div style={{ display: 'flex', alignItems: 'center' }}><span style={styles.dot(COLORS.equipamiento.ABASTO)}></span> Abasto</div>
@@ -138,7 +179,6 @@ export default function ChartsContainer() {
           </ResponsiveContainer>
         </div>
       </div>
-
     </div>
   );
 }
