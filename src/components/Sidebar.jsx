@@ -138,7 +138,7 @@ export default function Sidebar() {
         
         {/* Contexto */}
         <AccordionSection 
-          title="Hacer visible lo cotidiano: Daos para cuidar a quien cuida" 
+          title="Hacer visible lo cotidiano: Datos para cuidar a quien cuida" 
           tag="#Contexto"
           isOpen={sectionsState.contexto}
           onClick={() => toggle('contexto')}
