@@ -52,10 +52,10 @@ export default function Scorecards() {
 
   return (
     <div style={s.container}>
-      <div style={s.card}><div style={s.number}>{totalRutas}</div><div style={s.title}>RUTAS DE CUIDADO</div><div style={s.subtitle}>Vinculadas directamente a equipamiento</div></div>
-      <div style={s.card}><div style={s.number}>{Math.round(kmTotal)} km</div><div style={{...s.title, color: COLORS.rutas.Oyamel}}>DE CONEXIÓN</div><div style={s.subtitle}>Uniendo la zona alta de difícil acceso con la ciudad</div></div>
-      <div style={s.card}><div style={s.number}>+{demandaTotal.toLocaleString()}</div><div style={{...s.title, color: COLORS.rutas.Antigua}}>USUARIAS</div><div style={s.subtitle}>Beneficiadas diariamente por el servicio</div></div>
-      <div style={s.lastCard}><div style={s.number}>{Math.round(maxSaturacion)}%</div><div style={{...s.title, color: COLORS.rutas.Ocotal}}>ALTA DEMANDA</div><div style={s.subtitle}>En horas pico, la necesidad supera la capacidad de las unidades</div></div>
+      <div style={s.card}><div style={s.number}>{totalRutas}</div><div style={s.title}>RUTAS DE CUIDADO</div><div style={s.subtitle}>Conectando hogares con escuelas y servicios de salud</div></div>
+      <div style={s.card}><div style={s.number}>{Math.round(kmTotal)} km</div><div style={{...s.title, color: COLORS.rutas.Oyamel}}>DE CONEXIÓN PERIFÉRICA</div><div style={s.subtitle}>Uniendo la zona alta de difícil acceso con la ciudad</div></div>
+      <div style={s.card}><div style={s.number}>+{demandaTotal.toLocaleString()}</div><div style={{...s.title, color: COLORS.rutas.Antigua}}>VIAJES DE CUIDADO</div><div style={s.subtitle}>Sosteniendo la vida cotidiana de mujeres e infancias</div></div>
+      <div style={s.lastCard}><div style={s.number}>{Math.round(maxSaturacion)}%</div><div style={{...s.title, color: COLORS.rutas.Ocotal}}>SOBRECARGA DE CUIDADO</div><div style={s.subtitle}>La necesidad comunitaria rebasa la infraestructura actual ofertada</div></div>
     </div>
   );
 }

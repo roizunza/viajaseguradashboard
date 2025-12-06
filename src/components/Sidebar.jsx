@@ -57,7 +57,7 @@ const AccordionSection = ({ title, tag, isOpen, onClick, children }) => {
 
   return (
     <div style={s.container}>
-      {/* Cabecera Clickeable */}
+      {/* Header clickeable */}
       <div onClick={onClick}>
         <div style={s.header}>
           <h3 style={s.titleText}>{title}</h3>
@@ -81,8 +81,8 @@ const AccordionSection = ({ title, tag, isOpen, onClick, children }) => {
 // --- COMPONENTE PRINCIPAL ---
 export default function Sidebar() {
   
-  // ESTADO: Objeto para controlar múltiples secciones abiertas a la vez
-  // True  es igual a abierto y las demás en false/undefined
+  // Objeto para controlar múltiples secciones abiertas a la vez
+  // True es igual a abierto y las demás en false/undefined
   const [sectionsState, setSectionsState] = useState({
     contexto: true,
     metodologia: false,
@@ -144,10 +144,10 @@ export default function Sidebar() {
           onClick={() => toggle('contexto')}
         >
           <p style={s.bodyText}>
-            El proyecto <strong>"Viaja Segura"</strong> evalúa la iniciativa de la Ruta 66, un servicio exclusivo para mujeres e infancias que opera en horas pico y circula desde el área montañosa de la alcaldía Magdalena Contreras hasta la zona de Miguel Ángel de Quevedo en Coyoacán.
+            El proyecto <strong>"Viaja Segura"</strong> evalúa la iniciativa de la Asociación Civil Ruta 66, que opera un servicio exclusivo para mujeres e infancias en la periferia sur de la CDMX.
           </p>
           <p style={s.bodyText}>
-            Me integré al proyecto en su etapa de evaluación con una convicción: usar los datos para respaldar la labor social que ellas ya sostienen.
+            La iniciativa social ya existía y era valiosa, pero requería traducirse al lenguaje técnico para garantizar su continuidad. Me integré al proyecto para instrumentar la evaluación técnica que la institución SEMOVI necesitaba. A través del análisis de datos, construí el sustento operativo que permitió legitimar el modelo y proyectar su ampliación
           </p>
         </AccordionSection>
 
@@ -158,15 +158,15 @@ export default function Sidebar() {
           isOpen={sectionsState.metodologia}
           onClick={() => toggle('metodologia')}
         >
-          <p style={s.bodyText}>Para comprender la movilidad de mujeres e infancias, el reto fue traducir la experiencia de viaje en información cuantificable.</p>
+          <p style={s.bodyText}>Para comprender la movilidad de mujeres e infancias, el reto fue traducir la experiencia de viaje cotidiana en información cuantificable y estructurada.</p>
           <div style={s.listItem}>
-            <p style={s.bodyText}><span style={s.listKey}>En la calle:</span> Diseñé instrumentos para registrar no solo cuántas personas subían o bajaban, sino dónde lo hacían. Participé en los recorridos para asegurar que los datos reflejaran la realidad operativa.</p>
+            <p style={s.bodyText}><span style={s.listKey}>Levantamiento en campo:</span> Diseñé instrumentos específicos para registrar dinámicas de ascenso y descenso no convencionales, participando directamente en los recorridos para asegurar la integridad y sensibilidad del dato.</p>
           </div>
           <div style={s.listItem}>
-            <p style={s.bodyText}><span style={s.listKey}>En el mapa:</span> Digitalicé y limpié los datos recabados de la operación, creando una base de datos limpia y estructurada que nos permitió ver, por primera vez, la operación completa en un mapa.</p>
+            <p style={s.bodyText}><span style={s.listKey}>Procesamiento Geoespacial:</span> Digitalicé y depuré la información operativa, construyendo la primera base de datos abierta y estructurada del servicio.</p>
           </div>
           <div style={s.listItem}>
-            <p style={s.bodyText}><span style={s.listKey}>El análisis:</span> Fui más allá de los puntos, generé un análisis de <strong>500 metros (caminatas breves)</strong> alrededor de las paradas. Crucé esta cobertura con equipamientos de cuidados (escuelas, mercados) para ver con qué lugares conectaba realmente la ruta.</p>
+            <p style={s.bodyText}><span style={s.listKey}>Análisis Espacial:</span> Fui más allá de los puntos: generé modelos de accesibilidad (isocronas de 500m) para cruzar la oferta de transporte con la infraestructura de cuidados, buscando correlacionar los nodos de mayor afluencia con la ubicación de escuelas, mercados y centros de salud.</p>
           </div>
         </AccordionSection>
 
@@ -177,12 +177,12 @@ export default function Sidebar() {
           isOpen={sectionsState.hallazgos}
           onClick={() => toggle('hallazgos')}
         >
-          <p style={s.bodyText}>El análisis geoespacial confirmó dos patrones territoriales clave:</p>
+          <p style={s.bodyText}>El análisis geoespacial confirmó dos patrones territoriales:</p>
           <div style={{ marginBottom: '10px', borderLeft: '2px solid rgba(255,255,255,0.3)', paddingLeft: '8px' }}>
-            <p style={s.bodyText}><span style={s.listKey}>Puente vital:</span> La ruta funciona conecta zonas altas de difícil acceso (Oyamel, Antigua, Ocotal) con avenidas principales como el Blvd. Adolfo López Mateos y lugares clave como Ciudad Universitaria.</p>
+            <p style={s.bodyText}><span style={s.listKey}>Puente vital:</span> La ruta funciona como un eje de integración territorial, reduciendo el aislamiento de la periferia alta (Oyamel, Ocotal, Antigua) con ejes de oportunidades y equipamientos regionales como Ciudad Universitaria.</p>
           </div>
           <div style={{ borderLeft: '2px solid rgba(255,255,255,0.3)', paddingLeft: '8px' }}>
-            <p style={s.bodyText}><span style={s.listKey}>Soporte de vida:</span> Los puntos de mayor afluencia coinciden con escuelas y mercados, validando que el servicio sostiene las actividades cotidianas en la vida de mujeres e infancias.</p>
+            <p style={s.bodyText}><span style={s.listKey}>Soporte de vida:</span> Los nodos de mayor afluencia coinciden con escuelas y servicios de salud. Esta evidencia técnica permitió legitimar la operación de la ruta, reconociendo que el servicio es un eslabón indispensable en la cadena de cuidados de la zona.</p>
           </div>
         </AccordionSection>
 
@@ -193,7 +193,9 @@ export default function Sidebar() {
           isOpen={sectionsState.impacto}
           onClick={() => toggle('impacto')}
         >
-          <p style={s.bodyText}>Decidí codificar esta investigación en un Dashboard Interactivo para democratizar el acceso a la evidencia. Mi motivación nace de creer en la gestión de esta información como la una vía para poner las necesidades de las mujeres y las infancias sobre la mesa; necesitamos datos que nos ayuden a reconfigurar la movilidad no solo para movernos más rápido, sino para cuidar mejor a quienes nos cuidan.</p>
+          <p style={s.bodyText}>Decidí codificar esta investigación para transformar un diagnóstico estático en una herramienta de incidencia política.</p>
+          <p style={s.bodyText}>Al democratizar el acceso a esta evidencia, el dashboard visibiliza la economía de cuidados como eje central de la movilidad. La medición de estos patrones genera la evidencia necesaria para que las políticas públicas de transporte dejen de ser neutras y comiencen a ser redistributivas.</p>
+          <p style={s.bodyText}>Necesitamos datos abiertos que nos ayuden a reconfigurar la movilidad, no solo para movernos más rápido, sino para cuidar mejor a quienes nos cuidan.</p>
         </AccordionSection>
 
       </div>
